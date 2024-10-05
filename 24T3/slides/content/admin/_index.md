@@ -7,7 +7,7 @@ outputs = ["Reveal"]
 
 everything u need to know, hopefully
 
-slides are at [tp.denzeliskandar.com/admin](tp.denzeliskandar.com/admin)
+slides are at [tp.denzeliskandar.com/admin](https://tp.denzeliskandar.com/admin)
 
 ---
 
@@ -34,7 +34,7 @@ slides are at [tp.denzeliskandar.com/admin](tp.denzeliskandar.com/admin)
 ---
 
 ## where to access resources
-* code and slides will be at [github.com/dzl-i/training-program](github.com/dzl-i/training-program)
+* code and slides will be at [github.com/dzl-i/training-program](https://github.com/dzl-i/training-program)
 * this should be recorded and posted on yt maybe
 
 ---
@@ -98,7 +98,7 @@ what do i need to do?
 ## project idea
 * very important
 * we shall make smth cool 😎
-* plz give project idea at [https://forms.gle/VzSLTiGCNto2qE6W7](https://forms.gle/VzSLTiGCNto2qE6W7)
+* plz give project idea at [forms.gle/VzSLTiGCNto2qE6W7](https://forms.gle/VzSLTiGCNto2qE6W7)
 * link is also in discord at #court-docket
 
 {{% /section %}}
