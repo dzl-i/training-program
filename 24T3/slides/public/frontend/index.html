@@ -23,7 +23,193 @@
 
 
 <section data-shortcode-section>
-<h2 id="why-nextjs">why nextjs</h2>
+<h2 id="disclaimer">disclaimer</h2>
+<ul>
+<li>i am not an expert in nextjs or reactjs
+<ul>
+<li>there are also some things i dont know</li>
+<li>i am still learning too</li>
+</ul>
+</li>
+<li>i might still get things wrong (apologies in advance)</li>
+<li>im trying my best (real)</li>
+</ul>
+</section><section>
+<p>you can usually learn more by doing it yourself, so hopefully this yapping session will be quick and we can move on to exercises</p>
+
+</section>
+</section><section>
+
+
+<section data-shortcode-section>
+<h2 id="what-is-nextjs">what is next.js</h2>
+<p>Next.js basically wraps React.js</p>
+</section><section>
+<h2 id="wdym">wdym</h2>
+</section><section>
+<h2 id="what-is-nextjs-1">what is next.js</h2>
+<ul>
+<li>TypeScript wraps JavaScript -&gt; adds typesafety</li>
+<li>Next.js wraps React.js -&gt; adds extra features</li>
+</ul>
+</section><section>
+<h3 id="what-extra-features">what extra features?</h3>
+<ul>
+<li>server components</li>
+<li>performance (cache)</li>
+<li>routing (directory structure)</li>
+</ul>
+</section><section>
+<h4 id="directory-structure">directory structure</h4>
+<pre tabindex="0"><code>my-very-cool-project/
+├── src/
+│   ├── app/
+│   │   ├── dashboard/
+│   │   │   └── page.tsx
+│   │   ├── login/
+│   │   │   └── page.tsx
+│   │   ├── register/
+│   │   │   └── page.tsx
+│   │   ├── layout.tsx
+│   │   ├── page.tsx
+│   │   └── globals.css
+│   └── components/
+├── public/
+</code></pre></section><section>
+<p>and many other stuff</p>
+<p><a href="https://nextjs.org/docs">https://nextjs.org/docs</a></p>
+
+</section>
+</section><section>
+
+
+<section data-shortcode-section>
+<h2 id="nextjs-vs-reactjs">next.js vs react.js</h2>
+<p>you can still use everything that React.js has</p>
+<p><span class='fragment ' >umm but idk what React.js has</span></p>
+</section><section>
+<h2 id="hooks">hooks</h2>
+<p><span class='fragment ' >what are hooks?</span></p>
+<p><span class='fragment ' >hooks allow function components to have access to state and other React features</span></p>
+</section><section>
+<h3 id="common-hooks">common hooks</h3>
+<ul>
+<li>useState</li>
+<li>useEffect</li>
+<li>useMemo</li>
+</ul>
+<p><span class='fragment ' >sound familiar yet?</span></p>
+</section><section>
+<h3 id="no-i-gotchu">no? i gotchu</h3>
+<p>if yes, uhh just keep listening 🤭</p>
+</section><section>
+<h3 id="usestate">useState</h3>
+<p>State lets a component “remember” information like user input. For example, a form component can use state to store the input value</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape><span style="display:flex;"><span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">RegisterPage() {</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">const</span> [<span style="color:#a6e22e">name</span>, <span style="color:#a6e22e">setName</span>] <span style="color:#f92672">=</span> <span style="color:#a6e22e">useState</span>(<span style="color:#e6db74">&#34;&#34;</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// ...
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>}
+</span></span></code></pre></div></section><section>
+<h3 id="useeffect">useEffect</h3>
+<p>Effects let a component connect to and synchronize with external systems such as performing side effects in function components, such as data fetching, subscriptions, blablabla</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape><span style="display:flex;"><span><span style="color:#a6e22e">useEffect</span>(() <span style="color:#f92672">=&gt;</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">interval</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">setInterval</span>(() <span style="color:#f92672">=&gt;</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">setSeconds</span>(<span style="color:#a6e22e">s</span> <span style="color:#f92672">=&gt;</span> <span style="color:#a6e22e">s</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>);
+</span></span><span style="display:flex;"><span>    }, <span style="color:#ae81ff">1000</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> () <span style="color:#f92672">=&gt;</span> <span style="color:#a6e22e">clearInterval</span>(<span style="color:#a6e22e">interval</span>);
+</span></span><span style="display:flex;"><span>}, []);
+</span></span></code></pre></div></section><section>
+<h3 id="usememo">useMemo</h3>
+<p>useMemo lets you cache the result of an expensive calculation (or even inexpensive calculation if u want)</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">readyToSubmit</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">useMemo</span>(
+</span></span><span style="display:flex;"><span>    () <span style="color:#f92672">=&gt;</span> <span style="color:#a6e22e">validator</span>.<span style="color:#a6e22e">isEmail</span>(<span style="color:#a6e22e">email</span>) <span style="color:#f92672">&amp;&amp;</span> <span style="color:#a6e22e">password</span>,
+</span></span><span style="display:flex;"><span>    [<span style="color:#a6e22e">email</span>, <span style="color:#a6e22e">password</span>]
+</span></span><span style="display:flex;"><span>);
+</span></span></code></pre></div></section><section>
+<h3 id="custom-hooks">custom hooks</h3>
+<p>&hellip; and many more hooks</p>
+<p><span class='fragment ' ><a href="https://react.dev/learn/reusing-logic-with-custom-hooks#extracting-your-own-custom-hook-from-a-component">read the docs :)</a></span></p>
+
+</section>
+</section><section>
+
+
+<section data-shortcode-section>
+<h2 id="what-is-tailwindcss">what is tailwindcss</h2>
+<p>CSS, but better</p>
+<p><span class='fragment ' >how is it better? 🤓</span></p>
+</section><section>
+<h3 id="inline-css">inline css</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape><span style="display:flex;"><span>&lt;<span style="color:#f92672">div</span> <span style="color:#a6e22e">style</span><span style="color:#f92672">=</span>{{ <span style="color:#a6e22e">width</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;500px&#34;</span> }}&gt;
+</span></span></code></pre></div><p>not this kind of inline css (this is lame)</p>
+</section><section>
+<h3 id="inline-css-1">inline css</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape><span style="display:flex;"><span>&lt;<span style="color:#f92672">div</span> <span style="color:#a6e22e">className</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;flex items-center justify-center min-h-screen&#34;</span>&gt;
+</span></span></code></pre></div><p>this kind of inline css</p>
+</section><section>
+<h3 id="breaking-it-down">breaking it down</h3>
+<ul>
+<li><code>flex</code> is basically <code>display: flex</code></li>
+<li><code>items-center</code> is basically <code>align-items: center</code></li>
+<li><code>justify-center</code> is basically <code>justify-content: center</code></li>
+<li><code>min-h-screen</code> is basically <code>min-height: 100vh</code></li>
+</ul>
+</section><section>
+<h3 id="why-is-that-good-">why is that good 🤨</h3>
+<p><span class='fragment ' >we no longer have to define style in another file, it is all done in the same file</span></p>
+</section><section>
+<h4 id="but-what-about-repetition">but what about repetition?</h4>
+<p>rEpEaTiNg cOdE iS bAd</p>
+<p><span class='fragment ' >we can define things like colour hex in <code>tailwind.config.ts</code></span></p>
+</section><section>
+<h3 id="responsiveness">responsiveness</h3>
+<p>what is it?</p>
+<p><span class='fragment ' >website remains usable even in different screen sizes</span></p>
+</section><section>
+<h3 id="okay-how">okay how</h3>
+<p>define screen sizes in <code>tailwind.config.ts</code></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape><span style="display:flex;"><span><span style="color:#a6e22e">theme</span><span style="color:#f92672">:</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">screens</span><span style="color:#f92672">:</span> {
+</span></span><span style="display:flex;"><span>      <span style="color:#e6db74">&#39;sm&#39;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;640px&#39;</span>,   <span style="color:#75715e">// =&gt; @media (min-width: 640px) { ... }
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>      <span style="color:#e6db74">&#39;md&#39;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;768px&#39;</span>,   <span style="color:#75715e">// =&gt; @media (min-width: 768px) { ... }
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>      <span style="color:#e6db74">&#39;lg&#39;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;1024px&#39;</span>,  <span style="color:#75715e">// =&gt; @media (min-width: 1024px) { ... }
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>      <span style="color:#e6db74">&#39;xl&#39;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;1280px&#39;</span>,  <span style="color:#75715e">// =&gt; @media (min-width: 1280px) { ... }
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>      <span style="color:#e6db74">&#39;2xl&#39;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;1536px&#39;</span>, <span style="color:#75715e">// =&gt; @media (min-width: 1536px) { ... }
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    },
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div></section><section>
+<h3 id="and-how-do-we-use-it">and how do we use it</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape><span style="display:flex;"><span>&lt;<span style="color:#f92672">div</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;text-sm md:text-base lg:text-lg&#34;</span>&gt;
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">This</span> <span style="color:#a6e22e">text</span> <span style="color:#a6e22e">will</span> <span style="color:#a6e22e">be</span> <span style="color:#a6e22e">small</span> <span style="color:#a6e22e">on</span> <span style="color:#a6e22e">mobile</span>, <span style="color:#a6e22e">medium</span> <span style="color:#a6e22e">on</span> <span style="color:#a6e22e">tablets</span>, <span style="color:#a6e22e">and</span> <span style="color:#a6e22e">large</span> <span style="color:#a6e22e">on</span> <span style="color:#a6e22e">desktops</span>.
+</span></span><span style="display:flex;"><span>&lt;/<span style="color:#f92672">div</span>&gt;
+</span></span></code></pre></div></section><section>
+<h3 id="as-always">as always</h3>
+<p><a href="https://tailwindcss.com/docs/installation">TailwindCSS Documentation</a></p>
+<p>seriously, even i keep coming back to this website</p>
+
+</section>
+</section><section>
+
+
+<section data-shortcode-section>
+<h2 id="setting-up">setting up</h2>
+<pre tabindex="0"><code>npx create-next-app@latest
+</code></pre>
+</section>
+</section><section>
+
+
+<section data-shortcode-section>
+<h1 id="questions">questions?</h1>
+
+</section>
+</section><section>
+
+
+<section data-shortcode-section>
+<h1 id="demo">demo</h1>
+<p>turning figma into reality</p>
 
 </section>
 </section>
