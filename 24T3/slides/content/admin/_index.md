@@ -22,7 +22,8 @@ slides are at [tp.denzeliskandar.com/admin](https://tp.denzeliskandar.com/admin)
 
 ## how to contact me
 
-* [@babipanggangg]() on Discord
+* [@.pandrr]() on Discord - Chris
+* [@babipanggangg]() on Discord - Denzel
 
 ---
 
@@ -54,6 +55,22 @@ slides are at [tp.denzeliskandar.com/admin](https://tp.denzeliskandar.com/admin)
 * why'd you join the training program?
 * what do you wanna get out of the program?
 * what has been your favourite course so far
+
+{{% /section %}}
+
+---
+
+{{% section %}}
+
+## what are we doing
+
+what is this program about lol
+
+---
+
+## some previous projects
+
+[devsoc.app/our-projects](https://devsoc.app/our-projects)
 
 {{% /section %}}
 
