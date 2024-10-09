@@ -289,6 +289,159 @@ npx create-next-app@latest
 
 {{% section %}}
 
+## data fetching
+
+* process of retrieving data from a server or API to display in a web application's user interface
+* involves making HTTP requests to specific endpoints, then updating the UI with the received data
+
+---
+
+### data fetching in next.js
+
+```tsx
+export default async function Page() {
+  let data = await fetch('https://api.vercel.app/blog')
+  let posts = await data.json()
+  return (
+    <ul>
+      {posts.map((post) => (
+        <li key={post.id}>{post.title}</li>
+      ))}
+    </ul>
+  )
+}
+```
+
+{{% fragment %}} there is no longer a need for **axios** {{% /fragment %}}
+
+---
+
+### async? await?
+
+asynchronous React Server Component
+
+we need to **wait** for the data to be sent back to us
+
+---
+
+### soooo...
+
+now we have the results stored in a JSON which we can use (e.g. displaying the information in a dashboard)
+
+{{% /section %}}
+
+---
+
+{{% section %}}
+
+## API/Routes
+
+what are they?
+
+---
+
+### API
+
+- allow clients to access particular functions or data
+- act as gateways for communication between the client and server, defining how requests should be made and what responses to expect.
+
+---
+
+## route examples
+
+{{<figure src="/route-examples.png">}}
+
+---
+
+## API Workflow
+
+Retrieving account details
+
+{{<figure src="/rest-api-flowchart.png" height="450">}}
+
+---
+
+### why is this important
+
+---
+
+### integration of frontend and backend
+
+we need to know what the backend is sending us
+
+{{% fragment %}}... so we know what to display in frontend {{% /fragment %}}
+
+---
+
+### how do we know?
+
+look at the backend code and read it 🤓
+
+... or is there a better way to do it?
+
+---
+
+## rest client extension
+
+{{<figure src="/rest-client.png">}}
+
+---
+
+### rest client extension
+
+* allows us to send requests to the backend server
+* it can be localhost or actual server
+
+```
+POST https://localhost:3000/login HTTP/1.1
+content-type: application/json
+
+{
+  "email": "admin@gmail.com",
+  "password": "supersecretpassword"
+}
+```
+
+(totally not my password)
+
+---
+
+### output
+
+```
+HTTP/1.1 200 OK
+X-Powered-By: Express
+Vary: Origin
+Access-Control-Allow-Credentials: true
+Set-Cookie: some cookie settings... (auth workshop)
+Content-Type: application/json; charset=utf-8
+Content-Length: 109
+ETag: W/"6d-Wc6h/8EfqjpTyRKZN3rJaS6fT2Y"
+Date: Tue, 08 Oct 2024 07:35:45 GMT
+Connection: keep-alive
+keep-alive: timeout=5
+
+{
+  "researcherId": "d56195cc-6432-4f47-9e3b-0976ae7a85b6",
+  "researcherName": "admin",
+  "researcherUsername": "admin"
+}
+```
+
+---
+
+soo it shows you the various "options" for the request, such as Access-Control-Allow-Credentials, etc etc
+
+but most importantly, you know what the output of the backend is
+
+this will be **very useful** when integrating frontend and backend
+
+{{% /section %}}
+
+---
+
+{{% section %}}
+
 # questions?
 
 {{% /section %}}
