@@ -452,6 +452,18 @@ this will be **very useful** when integrating frontend and backend
 
 # demo
 
-turning figma into reality
+making a registration page
+
+---
+
+## data fetching
+
+try to send a request to one of my servers 🤭
+
+shameless plug incoming
+
+[https://api.encrypted.denzeliskandar.com/auth/register](https://api.encrypted.denzeliskandar.com/auth/register)
+
+method: POST
 
 {{% /section %}}
