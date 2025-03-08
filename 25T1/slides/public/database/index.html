@@ -1,0 +1,535 @@
+<!doctype html>
+<html lang="en">
+  <head><script src="/25T1/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=25T1/livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+<title>API Design and Documentation</title>
+
+
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><link rel="stylesheet" href="/25T1/reveal-js/dist/reset.css">
+<link rel="stylesheet" href="/25T1/reveal-js/dist/reveal.css"><link rel="stylesheet" href="/25T1/reveal-js/dist/theme/black.css" id="theme">
+<link rel="stylesheet" href="/25T1/highlight-js/default.min.css">
+  </head>
+  <body>
+    
+    <div class="reveal">
+      <div class="slides">
+  
+
+    <section><h1 id="database-fundamentals">Database Fundamentals</h1>
+<p><code>SELECT username, password FROM users;</code></p>
+</section><section>
+
+
+<section data-shortcode-section>
+<p>slides are at <a href="https://tp.denzeliskandar.com/database">tp.denzeliskandar.com/database</a></p>
+
+</section>
+</section><section>
+
+
+<section data-shortcode-section>
+<h2 id="disclaimer">disclaimer</h2>
+<ul>
+<li>i am not an expert in databases and prisma
+<ul>
+<li>there are also some things i dont know</li>
+<li>i am still learning too</li>
+</ul>
+</li>
+<li>i might still get things wrong (apologies in advance)</li>
+<li>im trying my best (real)</li>
+</ul>
+</section><section>
+<p>agenda: i will be introducing database concepts, talk a little bit about prisma, then we will design our schema together 🔥</p>
+
+</section>
+</section><section>
+
+
+<section data-shortcode-section>
+<h2 id="what-is-a-database">what is a database?</h2>
+<ul>
+<li>a structured collection of data</li>
+<li>allows for efficient storage, retrieval, and management of information</li>
+<li>provides a centralised and persistent way to store and access data</li>
+</ul>
+</section><section>
+<h2 id="what-is-a-relational-database">what is a relational database?</h2>
+<ul>
+<li>data is stored in tables with rows and columns</li>
+<li>tables have a defined schema with data types</li>
+<li>relationships can be established between tables</li>
+<li>queried using Structured Query Language (SQL)</li>
+<li>Examples: PostgreSQL, MySQL, Oracle, SQL Server</li>
+</ul>
+</section><section>
+<h2 id="relational-database-concepts">relational database concepts</h2>
+</section><section>
+<h3 id="tables">tables</h3>
+<ul>
+<li>a table is a collection of related data stored in rows and columns</li>
+<li>columns define the structure of the data, with specific data types</li>
+<li>rows represent individual records or instances of data</li>
+</ul>
+</section><section>
+<h3 id="primary-keys">primary keys</h3>
+<ul>
+<li>a primary key is a column (or set of columns) that uniquely identifies each row in a table</li>
+<li>primary keys must be unique and cannot be null</li>
+<li>used to establish relationships between tables</li>
+</ul>
+</section><section>
+<h3 id="foreign-keys">foreign keys</h3>
+<ul>
+<li>a foreign key is a column (or set of columns) in one table that refers to the primary key of another table</li>
+<li>foreign keys are used to create relationships between tables</li>
+<li>allows you to link data across multiple tables</li>
+</ul>
+</section><section>
+<h3 id="relationships">relationships</h3>
+<ul>
+<li>one-to-one: a single row in one table is related to a single row in another table (e.g. student and zid)</li>
+<li>one-to-many: a single row in one table is related to multiple rows in another table (e.g. customer and sales purchases)</li>
+<li>many-to-many: multiple rows in one table are related to multiple rows in another table (e.g. students and courses taken)</li>
+</ul>
+
+</section>
+</section><section>
+
+
+<section data-shortcode-section>
+<h2 id="sql-basics">sql basics</h2>
+</section><section>
+<h3 id="select">select</h3>
+<p><code>SELECT</code> statement is used to retrieve data from a table</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">FROM</span> users;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> name, email <span style="color:#66d9ef">FROM</span> users;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">FROM</span> users <span style="color:#66d9ef">WHERE</span> id <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">FROM</span> users <span style="color:#66d9ef">ORDER</span> <span style="color:#66d9ef">BY</span> name <span style="color:#66d9ef">DESC</span>;
+</span></span></code></pre></div></section><section>
+<h3 id="insert">insert</h3>
+<p><code>INSERT</code> statement is used to add new data to a table</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape><span style="display:flex;"><span><span style="color:#66d9ef">INSERT</span> <span style="color:#66d9ef">INTO</span> users (name, email)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">VALUES</span> (<span style="color:#e6db74">&#39;John Doe&#39;</span>, <span style="color:#e6db74">&#39;john@example.com&#39;</span>);
+</span></span></code></pre></div></section><section>
+<h3 id="update">update</h3>
+<p><code>UPDATE</code> statement is used to modify existing data in a table</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape><span style="display:flex;"><span><span style="color:#66d9ef">UPDATE</span> users
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">SET</span> email <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;jane.doe@example.com&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">WHERE</span> id <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>;
+</span></span></code></pre></div></section><section>
+<h3 id="delete">delete</h3>
+<p><code>DELETE</code> statement is used to remove data from a table</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape><span style="display:flex;"><span><span style="color:#66d9ef">DELETE</span> <span style="color:#66d9ef">FROM</span> users
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">WHERE</span> id <span style="color:#f92672">=</span> <span style="color:#ae81ff">3</span>;
+</span></span></code></pre></div></section><section>
+<h3 id="join">join</h3>
+<p>JOINs are used to combine rows from two or more tables based on a related column between them</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> u.name, p.title
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">FROM</span> users u
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">JOIN</span> posts p <span style="color:#66d9ef">ON</span> u.id <span style="color:#f92672">=</span> p.user_id;
+</span></span></code></pre></div><p>there are outer joins and inner joins (and so much more) but i never care enough to differentiate between them</p>
+
+</section>
+</section><section>
+
+
+<section data-shortcode-section>
+<h2 id="advanced-sql-concepts">advanced sql concepts</h2>
+</section><section>
+<h3 id="aggregations">aggregations</h3>
+<p>aggregate functions like <code>COUNT</code>, <code>SUM</code>, <code>AVG</code>, <code>MIN</code>, and <code>MAX</code> can be used to perform calculations on multiple rows</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> <span style="color:#66d9ef">COUNT</span>(<span style="color:#f92672">*</span>) <span style="color:#66d9ef">as</span> total_users <span style="color:#66d9ef">FROM</span> users;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> <span style="color:#66d9ef">SUM</span>(salary) <span style="color:#66d9ef">as</span> total_salary <span style="color:#66d9ef">FROM</span> employees;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> <span style="color:#66d9ef">AVG</span>(age) <span style="color:#66d9ef">as</span> average_age <span style="color:#66d9ef">FROM</span> customers;
+</span></span></code></pre></div></section><section>
+<h3 id="subqueries">Subqueries</h3>
+<p>subquery is a query nested inside another query; subqueries can be used in the <code>WHERE</code>, <code>SELECT</code>, or <code>FROM</code> clauses</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> name, email
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">FROM</span> users
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">WHERE</span> id <span style="color:#66d9ef">IN</span> (
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">SELECT</span> user_id
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">FROM</span> posts
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">WHERE</span> created_at <span style="color:#f92672">&gt;</span> <span style="color:#e6db74">&#39;2022-01-01&#39;</span>
+</span></span><span style="display:flex;"><span>);
+</span></span></code></pre></div></section><section>
+<h3 id="other-database-concepts">other database concepts</h3>
+<p>there are things such as</p>
+<ul>
+<li>ER modelling</li>
+<li>PLpgSQL</li>
+<li>triggers</li>
+<li>normalisation</li>
+<li>transactions</li>
+<li>serialisability</li>
+<li>concurrency</li>
+</ul>
+<p>do COMP3311! highly recommended</p>
+
+</section>
+</section><section>
+
+
+<section data-shortcode-section>
+<h3 id="database-schemas">database schemas</h3>
+<ul>
+<li>blueprint that defines the structure of a database, including tables, columns, data types, constraints, and relationships</li>
+<li>helps maintain data consistency and integrity</li>
+<li>facilitates database administration and maintenance</li>
+</ul>
+
+</section>
+</section><section>
+
+
+<section data-shortcode-section>
+<h2 id="introducing-prisma">introducing prisma</h2>
+</section><section>
+<h3 id="what-is-prisma">what is prisma?</h3>
+<ul>
+<li>a database toolkit</li>
+<li>provides an abstraction layer over the database</li>
+<li>offers a type-safe, auto-generated API for interacting with the database</li>
+<li>supports multiple database engines (PostgreSQL, MySQL, SQLite, MongoDB)</li>
+</ul>
+</section><section>
+<h3 id="using-prisma-with-postgresql">using prisma with postgresql</h3>
+<p>Define Prisma Schema:</p>
+<pre tabindex="0"><code>model User {
+    id    String    @id @default(uuid())
+    name  String
+    email String    @unique
+    posts Post[]
+}
+
+model Post {
+  id       String @id @default(uuid())
+  title    String
+  content  String
+  author   User   @relation(fields: [authorId], references: [id])
+  authorId String
+}
+</code></pre></section><section>
+<p>Generate the Prisma Client</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape><span style="display:flex;"><span>npx prisma generate
+</span></span></code></pre></div></section><section>
+<p>Use the Prisma Client in our code:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">PrismaClient</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#34;@prisma/client&#34;</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">prisma</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">PrismaClient</span>();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">user</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">prisma</span>.<span style="color:#a6e22e">user</span>.<span style="color:#a6e22e">findUnique</span>({
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">where</span><span style="color:#f92672">:</span> { <span style="color:#a6e22e">email</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;john@example.com&#39;</span> },
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">include</span><span style="color:#f92672">:</span> { <span style="color:#a6e22e">posts</span>: <span style="color:#66d9ef">true</span> }
+</span></span><span style="display:flex;"><span>})
+</span></span></code></pre></div>
+</section>
+</section><section>
+
+
+<section data-shortcode-section>
+<h2 id="case-study">case study</h2>
+<p>as in just looking at some of my code lol</p>
+</section><section>
+<h3 id="modelling-one-to-many-relationship">modelling one-to-many relationship</h3>
+<pre tabindex="0"><code>model Researcher {
+    id                     String          @id @default(uuid())
+    name                   String
+    institution            String
+    email                  String          @unique
+    username               String          @unique
+    password               String
+    remainingLoginAttempts Int             @default(3)
+    tokens                 Token[]
+    patients               Patient[]
+    dataAccessLogs         DataAccessLog[]
+}
+</code></pre></section><section>
+<p>and&hellip; what does the Patient model look like?</p>
+<pre tabindex="0"><code>model Patient {
+    id             String          @id @default(uuid())
+    name           String
+    dateOfBirth    DateTime        @db.Date
+    sex            Sex
+    diagnosticInfo String
+    treatmentInfo  String
+    researcherId   String
+    researcher     Researcher      @relation(fields: [researcherId], references: [id])
+    genomicData    GenomicData[]
+    phenotypes     PhenotypeData[]
+    imagingData    ImagingData[]
+    signalData     SignalData[]
+    categories     CategoryType[]
+}
+</code></pre></section><section>
+<h3 id="enums">enums</h3>
+<pre tabindex="0"><code>enum DataQuality {
+    UNKNOWN
+    LOW
+    MEDIUM
+    HIGH
+}
+</code></pre><p>pre-defined content</p>
+<pre tabindex="0"><code>model Data {
+    ...
+    quality       DataQuality     @default(UNKNOWN)
+    ...
+}
+</code></pre></section><section>
+<h3 id="before-i-continue-to-queries">before i continue to queries&hellip;</h3>
+<p>any questions?</p>
+</section><section>
+<h3 id="using-it-in-our-code">using it in our code</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape><span style="display:flex;"><span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">async</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">getPatientFromId</span>(<span style="color:#a6e22e">patientId</span>: <span style="color:#66d9ef">string</span>) {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">prisma</span>.<span style="color:#a6e22e">patient</span>.<span style="color:#a6e22e">findUnique</span>({
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">where</span><span style="color:#f92672">:</span> {
+</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">id</span>: <span style="color:#66d9ef">patientId</span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>  });
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>for optimisation, it is always wise to use <code>findUnique</code> instead of <code>findMany</code> when we are searching on a <code>@unique</code> or <code>@id</code> fields</p>
+</section><section>
+<h3 id="creating-data">creating data</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">researcher</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">getResearcherById</span>(<span style="color:#a6e22e">researcherId</span>);
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">researcher</span> <span style="color:#f92672">===</span> <span style="color:#66d9ef">null</span>) <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">null</span>; <span style="color:#75715e">// to keep typescript quiet
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">await</span> <span style="color:#a6e22e">prisma</span>.<span style="color:#a6e22e">patient</span>.<span style="color:#a6e22e">create</span>({
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">data</span><span style="color:#f92672">:</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">name</span>: <span style="color:#66d9ef">name</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">dateOfBirth</span>: <span style="color:#66d9ef">dateOfBirth</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">sex</span>: <span style="color:#66d9ef">sex</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">diagnosticInfo</span>: <span style="color:#66d9ef">diagnosticInfo</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">treatmentInfo</span>: <span style="color:#66d9ef">treatmentInfo</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">categories</span>: <span style="color:#66d9ef">categories</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">researcher</span><span style="color:#f92672">:</span> {
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">connect</span>: <span style="color:#66d9ef">researcher</span>
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>});
+</span></span></code></pre></div></section><section>
+<h3 id="include">include</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape><span style="display:flex;"><span><span style="color:#66d9ef">await</span> <span style="color:#a6e22e">prisma</span>.<span style="color:#a6e22e">patient</span>.<span style="color:#a6e22e">findUnique</span>({
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">where</span><span style="color:#f92672">:</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">id</span>: <span style="color:#66d9ef">patientId</span>
+</span></span><span style="display:flex;"><span>    },
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">include</span><span style="color:#f92672">:</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">genomicData</span>: <span style="color:#66d9ef">true</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">phenotypes</span>: <span style="color:#66d9ef">true</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">imagingData</span>: <span style="color:#66d9ef">true</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">signalData</span>: <span style="color:#66d9ef">true</span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>});
+</span></span></code></pre></div><p>prisma already includes some default fields&hellip;</p>
+</section><section>
+<h3 id="select">select</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape><span style="display:flex;"><span><span style="color:#66d9ef">await</span> <span style="color:#a6e22e">prisma</span>.<span style="color:#a6e22e">patient</span>.<span style="color:#a6e22e">findUnique</span>({
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">where</span><span style="color:#f92672">:</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">id</span>: <span style="color:#66d9ef">patientId</span>
+</span></span><span style="display:flex;"><span>    },
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">select</span><span style="color:#f92672">:</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">id</span>: <span style="color:#66d9ef">true</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">name</span>: <span style="color:#66d9ef">true</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">dateOfBirth</span>: <span style="color:#66d9ef">true</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">sex</span>: <span style="color:#66d9ef">true</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">diagnosticInfo</span>: <span style="color:#66d9ef">true</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">treatmentInfo</span>: <span style="color:#66d9ef">true</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">genomicData</span>: <span style="color:#66d9ef">true</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">phenotypes</span>: <span style="color:#66d9ef">true</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">imagingData</span>: <span style="color:#66d9ef">true</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">signalData</span>: <span style="color:#66d9ef">true</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">researcherId</span>: <span style="color:#66d9ef">true</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">categories</span>: <span style="color:#66d9ef">true</span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>});
+</span></span></code></pre></div><p>full control</p>
+</section><section>
+<h3 id="updating-data">updating data</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape><span style="display:flex;"><span><span style="color:#66d9ef">await</span> <span style="color:#a6e22e">prisma</span>.<span style="color:#a6e22e">patient</span>.<span style="color:#a6e22e">update</span>({
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">where</span><span style="color:#f92672">:</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">id</span>: <span style="color:#66d9ef">patientId</span>
+</span></span><span style="display:flex;"><span>    },
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">data</span>: <span style="color:#66d9ef">patientData</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">include</span><span style="color:#f92672">:</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">genomicData</span>: <span style="color:#66d9ef">true</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">phenotypes</span>: <span style="color:#66d9ef">true</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">imagingData</span>: <span style="color:#66d9ef">true</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">signalData</span>: <span style="color:#66d9ef">true</span>,
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>});
+</span></span></code></pre></div><p>prisma is smart enough to know what to update</p>
+</section><section>
+<h3 id="find-many-arrays">find many (arrays)</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">phenotypes</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">prisma</span>.<span style="color:#a6e22e">phenotypeData</span>.<span style="color:#a6e22e">findMany</span>({
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// select or include and where whatever
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>});
+</span></span></code></pre></div><p>you might find map useful</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape><span style="display:flex;"><span><span style="color:#66d9ef">return</span> <span style="color:#a6e22e">phenotypes</span>.<span style="color:#a6e22e">map</span>(<span style="color:#a6e22e">phenotype</span> <span style="color:#f92672">=&gt;</span> ({
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">id</span>: <span style="color:#66d9ef">phenotype.id</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">name</span>: <span style="color:#66d9ef">phenotype.name</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">description</span>: <span style="color:#66d9ef">phenotype.description</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">traits</span>: <span style="color:#66d9ef">phenotype.traits</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">categories</span>: <span style="color:#66d9ef">phenotype.categories</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">researcherId</span>: <span style="color:#66d9ef">phenotype.patient.researcher.id</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">researcherEmail</span>: <span style="color:#66d9ef">phenotype.patient.researcher.email</span>
+</span></span><span style="display:flex;"><span>}));
+</span></span></code></pre></div></section><section>
+<h3 id="searches">searches</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape><span style="display:flex;"><span><span style="color:#66d9ef">await</span> <span style="color:#a6e22e">prisma</span>.<span style="color:#a6e22e">patient</span>.<span style="color:#a6e22e">findMany</span>({
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">where</span><span style="color:#f92672">:</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">OR</span><span style="color:#f92672">:</span> [
+</span></span><span style="display:flex;"><span>            {
+</span></span><span style="display:flex;"><span>                <span style="color:#a6e22e">sex</span><span style="color:#f92672">:</span> {
+</span></span><span style="display:flex;"><span>                    <span style="color:#a6e22e">equals</span>: <span style="color:#66d9ef">searchTerm.toUpperCase</span>() <span style="color:#66d9ef">as</span> <span style="color:#66d9ef">any</span>,
+</span></span><span style="display:flex;"><span>                }
+</span></span><span style="display:flex;"><span>            },
+</span></span><span style="display:flex;"><span>            {
+</span></span><span style="display:flex;"><span>                <span style="color:#a6e22e">diagnosticInfo</span><span style="color:#f92672">:</span> {
+</span></span><span style="display:flex;"><span>                    <span style="color:#a6e22e">contains</span>: <span style="color:#66d9ef">searchTerm</span>,
+</span></span><span style="display:flex;"><span>                    <span style="color:#a6e22e">mode</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;insensitive&#34;</span>
+</span></span><span style="display:flex;"><span>                }
+</span></span><span style="display:flex;"><span>            },
+</span></span><span style="display:flex;"><span>            {
+</span></span><span style="display:flex;"><span>                <span style="color:#a6e22e">treatmentInfo</span><span style="color:#f92672">:</span> {
+</span></span><span style="display:flex;"><span>                    <span style="color:#a6e22e">contains</span>: <span style="color:#66d9ef">searchTerm</span>,
+</span></span><span style="display:flex;"><span>                    <span style="color:#a6e22e">mode</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;insensitive&#34;</span>
+</span></span><span style="display:flex;"><span>                }
+</span></span><span style="display:flex;"><span>            },
+</span></span><span style="display:flex;"><span>            {
+</span></span><span style="display:flex;"><span>                <span style="color:#a6e22e">categories</span><span style="color:#f92672">:</span> {
+</span></span><span style="display:flex;"><span>                    <span style="color:#a6e22e">has</span>: <span style="color:#66d9ef">searchTerm.toUpperCase</span>() <span style="color:#66d9ef">as</span> <span style="color:#66d9ef">any</span>
+</span></span><span style="display:flex;"><span>                }
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        ]
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>});
+</span></span></code></pre></div><p>not the most aesthetic looking piece of code but it gets the job done 🔥</p>
+
+</section>
+</section><section>
+
+
+<section data-shortcode-section>
+<h2 id="prisma-best-practices">prisma best practices</h2>
+</section><section>
+<h3 id="schema-design">schema design</h3>
+<ul>
+<li>model your data accurately</li>
+<li>use appropriate data types</li>
+<li>leverage relationships between entities</li>
+</ul>
+</section><section>
+<h3 id="query-optimisation">query optimisation</h3>
+<ul>
+<li>use the right query type (e.g., <code>findUnique</code> vs. <code>findMany</code>)</li>
+<li>leverage eager loading with <code>include</code> and <code>select</code></li>
+</ul>
+</section><section>
+<h3 id="error-handling">error handling</h3>
+<ul>
+<li>catch and handle Prisma client errors</li>
+<li>provide meaningful error messages to your users</li>
+<li>log errors for debugging and monitoring</li>
+</ul>
+</section><section>
+<h3 id="security-and-permissions">security and permissions</h3>
+<ul>
+<li>implement role-based access control (RBAC)</li>
+<li>avoid exposing sensitive data in your API</li>
+</ul>
+
+</section>
+</section><section>
+<h2 id="designing-a-database">designing a database</h2>
+<p>time to think (i know, sad)</p>
+</section>
+
+  
+
+
+</div>
+      
+
+    </div>
+<script type="text/javascript" src=/25T1/reveal-hugo/object-assign.js></script>
+
+
+<script src="/25T1/reveal-js/dist/reveal.js"></script>
+
+
+  <script type="text/javascript" src="/25T1/reveal-js/plugin/markdown/markdown.js"></script>
+  
+  <script type="text/javascript" src="/25T1/reveal-js/plugin/highlight/highlight.js"></script>
+  
+  <script type="text/javascript" src="/25T1/reveal-js/plugin/zoom/zoom.js"></script>
+  
+  <script type="text/javascript" src="/25T1/reveal-js/plugin/notes/notes.js"></script>
+  
+<script type="text/javascript">
+  
+  
+  function camelize(map) {
+    if (map) {
+      Object.keys(map).forEach(function(k) {
+        newK = k.replace(/(\_\w)/g, function(m) { return m[1].toUpperCase() });
+        if (newK != k) {
+          map[newK] = map[k];
+          delete map[k];
+        }
+      });
+    }
+    return map;
+  }
+
+  var revealHugoDefaults = { center: true, controls: true, history: true, progress: true, transition: "slide" };
+  var revealHugoSiteParams = {"slide_number":true};
+  var revealHugoPageParams = {};
+
+  var revealHugoPlugins = {
+    
+    plugins: [RevealMarkdown,RevealHighlight,RevealZoom,RevealNotes]
+  };
+
+  
+  var options = Object.assign({},
+    camelize(revealHugoDefaults),
+    camelize(revealHugoSiteParams),
+    camelize(revealHugoPageParams),
+    camelize(revealHugoPlugins));
+
+  Reveal.initialize(options);
+</script>
+
+
+
+
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+
+
+
+
+    
+    
+  </body>
+</html>

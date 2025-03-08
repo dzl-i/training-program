@@ -1,0 +1,16 @@
+baseURL = 'https://tp.denzeliskandar.com/25T1/'
+languageCode = 'en-au'
+title = 'Training Program 25T1'
+
+theme = "reveal-hugo"
+
+[params.reveal_hugo]
+slide_number = true
+
+[markup.goldmark.renderer]
+unsafe = true
+
+[outputFormats.Reveal]
+baseName = "index"
+mediaType = "text/html"
+isHTML = true
