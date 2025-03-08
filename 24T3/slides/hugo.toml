@@ -1,6 +1,6 @@
-baseURL = 'https://example.org/'
+baseURL = 'https://tp.denzeliskandar.com/24T3/'
 languageCode = 'en-au'
-title = 'Training Program'
+title = 'Training Program 24T3'
 
 theme = "reveal-hugo"
 
