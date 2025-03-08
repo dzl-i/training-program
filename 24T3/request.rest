@@ -1,0 +1,10 @@
+POST http://localhost:3030/auth/register HTTP/1.1
+content-type: application/json
+
+{
+  "name": "admin",
+  "email": "admin@admin.com",
+  "password": "supersecretpassword",
+  "username": "admin",
+  "institution": "UNSW"
+}
