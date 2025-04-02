@@ -11,7 +11,7 @@ outputs = ["Reveal"]
 
 {{% section %}}
 
-slides are at [tp.denzeliskandar.com/database](https://tp.denzeliskandar.com/database)
+slides are at [tp.denzeliskandar.com/database](https://tp.denzeliskandar.com/25T1/database)
 
 {{% /section %}}
 
@@ -457,12 +457,6 @@ await prisma.patient.update({
         id: patientId
     },
     data: patientData,
-    include: {
-        genomicData: true,
-        phenotypes: true,
-        imagingData: true,
-        signalData: true,
-    }
 });
 ```
 
