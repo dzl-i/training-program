@@ -23,7 +23,7 @@
 
 
 <section data-shortcode-section>
-<p>slides are at <a href="https://tp.denzeliskandar.com/frontend">tp.denzeliskandar.com/frontend</a></p>
+<p>slides are at <a href="https://tp.denzeliskandar.com/25T1/frontend">tp.denzeliskandar.com/frontend</a></p>
 
 </section>
 </section><section>
@@ -168,14 +168,24 @@
 </section><section>
 <h4 id="but-what-about-repetition">but what about repetition?</h4>
 <p>rEpEaTiNg cOdE iS bAd</p>
-<p><span class='fragment ' >we can define things like colour hex in <code>tailwind.config.ts</code></span></p>
+<p><span class='fragment ' >we can define things like colour hex in <del><code>tailwind.config.ts</code></del> <code>globals.css</code></span></p>
 </section><section>
+<h4 id="globalscss">globals.css</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape><span style="display:flex;"><span>@<span style="color:#66d9ef">theme</span> <span style="color:#f92672">inline</span> {
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">--color-background</span><span style="color:#f92672">:</span> <span style="color:#f92672">var</span><span style="color:#f92672">(</span><span style="color:#f92672">--background</span><span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">--color-foreground</span><span style="color:#f92672">:</span> <span style="color:#f92672">var</span><span style="color:#f92672">(</span><span style="color:#f92672">--foreground</span><span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">--font-sans</span><span style="color:#f92672">:</span> <span style="color:#f92672">var</span><span style="color:#f92672">(</span><span style="color:#f92672">--font-geist-sans</span><span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">--font-mono</span><span style="color:#f92672">:</span> <span style="color:#f92672">var</span><span style="color:#f92672">(</span><span style="color:#f92672">--font-geist-mono</span><span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">--color-primary</span><span style="color:#f92672">:</span> #ffdd00<span style="color:#f92672">;</span> <span style="color:#960050;background-color:#1e0010">#</span> <span style="color:#f92672">used</span> <span style="color:#f92672">like</span> <span style="color:#f92672">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;text-primary&#34;</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div></section><section>
 <h3 id="responsiveness">responsiveness</h3>
 <p>what is it?</p>
 <p><span class='fragment ' >website remains usable even in different screen sizes</span></p>
 </section><section>
 <h3 id="okay-how">okay how</h3>
-<p>define screen sizes in <code>tailwind.config.ts</code></p>
+<p>previously&hellip; define screen sizes in <code>tailwind.config.ts</code></p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape><span style="display:flex;"><span><span style="color:#a6e22e">theme</span><span style="color:#f92672">:</span> {
 </span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">screens</span><span style="color:#f92672">:</span> {
 </span></span><span style="display:flex;"><span>      <span style="color:#e6db74">&#39;sm&#39;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;640px&#39;</span>,   <span style="color:#75715e">// =&gt; @media (min-width: 640px) { ... }
@@ -186,6 +196,11 @@
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    },
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div></section><section>
+<h3 id="now">now</h3>
+<p>TailwindCSS v4.0.0</p>
+<figure><img src="/25T1/responsiveness.png">
+</figure>
+</section><section>
 <h3 id="and-how-do-we-use-it">and how do we use it</h3>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape><span style="display:flex;"><span>&lt;<span style="color:#f92672">div</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;text-sm md:text-base lg:text-lg&#34;</span>&gt;
 </span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">This</span> <span style="color:#a6e22e">text</span> <span style="color:#a6e22e">will</span> <span style="color:#a6e22e">be</span> <span style="color:#a6e22e">small</span> <span style="color:#a6e22e">on</span> <span style="color:#a6e22e">mobile</span>, <span style="color:#a6e22e">medium</span> <span style="color:#a6e22e">on</span> <span style="color:#a6e22e">tablets</span>, <span style="color:#a6e22e">and</span> <span style="color:#a6e22e">large</span> <span style="color:#a6e22e">on</span> <span style="color:#a6e22e">desktops</span>.
@@ -216,7 +231,7 @@
 </section><section>
 <h3 id="data-fetching-in-nextjs">data fetching in next.js</h3>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape><span style="display:flex;"><span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">default</span> <span style="color:#66d9ef">async</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">Page() {</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">data</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">fetch</span>(<span style="color:#e6db74">&#39;https://api.vercel.app/blog&#39;</span>)
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">data</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">fetch</span>(<span style="color:#e6db74">&#39;https://api.example.com/posts&#39;</span>)
 </span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">posts</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">data</span>.<span style="color:#a6e22e">json</span>()
 </span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> (
 </span></span><span style="display:flex;"><span>    &lt;<span style="color:#f92672">ul</span>&gt;
@@ -250,12 +265,12 @@
 </ul>
 </section><section>
 <h2 id="route-examples">route examples</h2>
-<figure><img src="/route-examples.png">
+<figure><img src="/25T1/route-examples.png">
 </figure>
 </section><section>
 <h2 id="api-workflow">API Workflow</h2>
 <p>Retrieving account details</p>
-<figure><img src="/rest-api-flowchart.png" height="450">
+<figure><img src="/25T1/rest-api-flowchart.png" height="450">
 </figure>
 </section><section>
 <h3 id="why-is-this-important">why is this important</h3>
@@ -269,7 +284,7 @@
 <p>&hellip; or is there a better way to do it?</p>
 </section><section>
 <h2 id="rest-client-extension">rest client extension</h2>
-<figure><img src="/rest-client.png">
+<figure><img src="/25T1/rest-client.png">
 </figure>
 </section><section>
 <h3 id="rest-client-extension-1">rest client extension</h3>
@@ -300,9 +315,9 @@ Connection: keep-alive
 keep-alive: timeout=5
 
 {
-  &#34;researcherId&#34;: &#34;d56195cc-6432-4f47-9e3b-0976ae7a85b6&#34;,
-  &#34;researcherName&#34;: &#34;admin&#34;,
-  &#34;researcherUsername&#34;: &#34;admin&#34;
+  &#34;id&#34;: &#34;d56195cc-6432-4f47-9e3b-0976ae7a85b6&#34;,
+  &#34;name&#34;: &#34;admin&#34;,
+  &#34;username&#34;: &#34;admin&#34;
 }
 </code></pre></section><section>
 <p>soo it shows you the various &ldquo;options&rdquo; for the request, such as Access-Control-Allow-Credentials, etc etc</p>

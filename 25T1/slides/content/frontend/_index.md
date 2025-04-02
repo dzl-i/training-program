@@ -10,7 +10,7 @@ Next.js and TailwindCSS
 
 {{% section %}}
 
-slides are at [tp.denzeliskandar.com/frontend](https://tp.denzeliskandar.com/frontend)
+slides are at [tp.denzeliskandar.com/frontend](https://tp.denzeliskandar.com/25T1/frontend)
 
 {{% /section %}}
 
@@ -225,7 +225,22 @@ this kind of inline css
 
 rEpEaTiNg cOdE iS bAd
 
-{{% fragment %}} we can define things like colour hex in `tailwind.config.ts` {{% /fragment %}}
+{{% fragment %}} we can define things like colour hex in ~~`tailwind.config.ts`~~ `globals.css` {{% /fragment %}}
+
+---
+
+#### globals.css
+
+```css
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+
+  --color-primary: #ffdd00; # used like class="text-primary"
+}
+```
 
 ---
 
@@ -239,7 +254,7 @@ what is it?
 
 ### okay how
 
-define screen sizes in `tailwind.config.ts`
+previously... define screen sizes in `tailwind.config.ts`
 
 ```ts
 theme: {
@@ -252,6 +267,14 @@ theme: {
     },
 }
 ```
+
+---
+
+### now
+
+TailwindCSS v4.0.0
+
+{{<figure src="/25T1/responsiveness.png">}}
 
 ---
 
@@ -300,7 +323,7 @@ npx create-next-app@latest
 
 ```tsx
 export default async function Page() {
-  let data = await fetch('https://api.vercel.app/blog')
+  let data = await fetch('https://api.example.com/posts')
   let posts = await data.json()
   return (
     <ul>
@@ -349,7 +372,7 @@ what are they?
 
 ## route examples
 
-{{<figure src="/route-examples.png">}}
+{{<figure src="/25T1/route-examples.png">}}
 
 ---
 
@@ -357,7 +380,7 @@ what are they?
 
 Retrieving account details
 
-{{<figure src="/rest-api-flowchart.png" height="450">}}
+{{<figure src="/25T1/rest-api-flowchart.png" height="450">}}
 
 ---
 
@@ -383,7 +406,7 @@ look at the backend code and read it 🤓
 
 ## rest client extension
 
-{{<figure src="/rest-client.png">}}
+{{<figure src="/25T1/rest-client.png">}}
 
 ---
 
@@ -422,9 +445,9 @@ Connection: keep-alive
 keep-alive: timeout=5
 
 {
-  "researcherId": "d56195cc-6432-4f47-9e3b-0976ae7a85b6",
-  "researcherName": "admin",
-  "researcherUsername": "admin"
+  "id": "d56195cc-6432-4f47-9e3b-0976ae7a85b6",
+  "name": "admin",
+  "username": "admin"
 }
 ```
 
